@@ -6,7 +6,7 @@ import 'package:flame/game.dart';
 import 'package:flame/palette.dart';
 import 'package:flutter/material.dart';
 import 'package:flame/components.dart';
-
+import 'package:flame/parallax.dart';
 import 'package:flame/collisions.dart';
 
 void main() {
@@ -26,8 +26,23 @@ class DemoGame extends FlameGame with PanDetector, HasCollisionDetection {
   late final PlayerComponent player;
   int score = 0;
 
+  final parallaxImages = [
+    ParallaxImageData('bg.png'),
+    ParallaxImageData('mountain-far.png'),
+    ParallaxImageData('mountains.png'),
+    ParallaxImageData('trees.png'),
+    ParallaxImageData('foreground-trees.png'),
+  ];
+
   @override
   Future<void> onLoad() async {
+    // final parallax = await loadParallaxComponent(
+    //   parallaxImages,
+    //   baseVelocity: Vector2(20.0, 0.0),
+    //   velocityMultiplierDelta: Vector2(1.8, 0.0),
+    // );
+    // add(parallax);
+
     add(player = PlayerComponent());
     addAll([
       FpsTextComponent(
@@ -51,11 +66,11 @@ class DemoGame extends FlameGame with PanDetector, HasCollisionDetection {
       ),
     ]);
 
-    // add(EnemyComponent(
-    //     position: Vector2(
-    //   250,
-    //   50,
-    // )));
+    // // add(EnemyComponent(
+    // //     position: Vector2(
+    // //   250,
+    // //   50,
+    // // )));
 
     add(EnemyCreator());
   }
